@@ -1,0 +1,352 @@
+00:00 +0: loading /private/tmp/mindflow-practice-test-work/app/test/audio_engine_test.dart
+00:00 +0: /private/tmp/mindflow-practice-test-work/app/test/audio_engine_test.dart: tune override applies exact bright and dense mix deltas
+00:00 +1: /private/tmp/mindflow-practice-test-work/app/test/audio_engine_test.dart: zero tune shift preserves an authored mix exactly
+00:00 +2: /private/tmp/mindflow-practice-test-work/app/test/audio_engine_test.dart: tune override clamps unsafe and non-finite audio values
+00:00 +3: /private/tmp/mindflow-practice-test-work/app/test/audio_engine_test.dart: rapid mix updates coalesce and acknowledge the latest target
+[AudioEngine] start
+[AudioEngine] updateMix sent scene=calm drone=0.200 pad=0.400 texture=0.300 pulse=0.200 cutoff=0.300 width=0.700 reverb=0.250 delay=0.050
+[AudioEngine] stop
+00:00 +4: /private/tmp/mindflow-practice-test-work/app/test/audio_engine_test.dart: a stopped engine caches the latest mix and replays it on start
+[AudioEngine] start
+[AudioEngine] stop
+00:00 +5: /private/tmp/mindflow-practice-test-work/app/test/audio_engine_test.dart: start fails closed when its cached audible mix is rejected
+[AudioEngine] start
+[AudioEngine] updateMix rejected: mix_bus_unavailable
+[AudioEngine] stop
+00:00 +6: /private/tmp/mindflow-practice-test-work/app/test/audio_engine_test.dart: a failed mix remains pending and an explicit flush retries it
+[AudioEngine] start
+[AudioEngine] updateMix error: PlatformException(UPDATE_MIX_FAILED, null, null, null)
+[AudioEngine] stop
+00:00 +7: /private/tmp/mindflow-practice-test-work/app/test/audio_engine_test.dart: a rejected mix acknowledgement remains pending until retry succeeds
+[AudioEngine] start
+[AudioEngine] updateMix rejected: native_rejected
+[AudioEngine] stop
+00:00 +8: /private/tmp/mindflow-practice-test-work/app/test/audio_engine_test.dart: flushPendingMix waits for the latest native acknowledgement
+[AudioEngine] start
+[AudioEngine] stop
+00:00 +9: /private/tmp/mindflow-practice-test-work/app/test/audio_engine_test.dart: a stale in-flight ACK cannot clear a newer transport target
+[AudioEngine] start
+[AudioEngine] loadLayers -> drone=replacement.flac pad=silence.wav texture=silence.wav pulse=silence.wav
+[AudioEngine] start
+[AudioEngine] stop
+00:00 +10: /private/tmp/mindflow-practice-test-work/app/test/audio_engine_test.dart: strict transport position uses the native 48 kHz clock
+[AudioEngine] loadLayers -> drone=drone.wav pad=silence.wav texture=silence.wav pulse=silence.wav
+[AudioEngine] stop
+00:00 +11: /private/tmp/mindflow-practice-test-work/app/test/audio_engine_test.dart: loadLayers sends all four native layer roles
+[AudioEngine] loadLayers -> drone=core_states/sleep/set_01/core_sleep_drone.flac pad=silence.wav texture=texture_sleep.wav pulse=silence.wav
+[AudioEngine] stop
+00:00 +12: /private/tmp/mindflow-practice-test-work/app/test/audio_engine_test.dart: non-strict load rejects a map without explicit acceptance
+[AudioEngine] loadLayers -> drone=silence.wav pad=silence.wav texture=broken.wav pulse=silence.wav
+🚨 AUDIO ENGINE ERROR: Native rejected layer load
+[AudioEngine] stop
+00:00 +13: /private/tmp/mindflow-practice-test-work/app/test/audio_engine_test.dart: crossfadeLayer sends the native layer-crossfade contract
+[AudioEngine] start
+[AudioEngine] crossfadeLayer role=texture file=texture_sleep_v2.wav duration=720s
+[AudioEngine] stop
+00:00 +14: /private/tmp/mindflow-practice-test-work/app/test/audio_engine_test.dart: crossfadeLayer reports a native rejection
+[AudioEngine] start
+[AudioEngine] crossfadeLayer role=pad file=missing.wav duration=30s
+[AudioEngine] stop
+00:00 +15: /private/tmp/mindflow-practice-test-work/app/test/audio_engine_test.dart: strict crossfade sends frame grid and decodes exact native ack
+[AudioEngine] start
+[AudioEngine] crossfadeLayer role=drone file=core_states/calmness/set_02/core_calm_drone.flac duration=120s startFrame=13714286 loopFrames=13714286 set=set_02
+[AudioEngine] stop
+00:00 +16: /private/tmp/mindflow-practice-test-work/app/test/audio_engine_test.dart: strict transitions can be prepared before transport start
+[AudioEngine] loadLayers -> drone=drone.flac pad=silence.wav texture=silence.wav pulse=silence.wav
+[AudioEngine] crossfadeLayer role=drone file=drone_02.flac duration=120s startFrame=13714286 loopFrames=13714286 set=set_02
+[AudioEngine] stop
+00:00 +17: /private/tmp/mindflow-practice-test-work/app/test/audio_engine_test.dart: a prepared strict plan can be cancelled before start
+[AudioEngine] loadLayers -> drone=drone.flac pad=silence.wav texture=silence.wav pulse=silence.wav
+[AudioEngine] stop
+00:00 +18: /private/tmp/mindflow-practice-test-work/app/test/audio_engine_test.dart: stopping a loaded strict transport releases it before start
+[AudioEngine] loadLayers -> drone=drone.flac pad=silence.wav texture=silence.wav pulse=silence.wav
+[AudioEngine] stop
+00:00 +19: /private/tmp/mindflow-practice-test-work/app/test/audio_engine_test.dart: loadLayers sends an authoritative strict transport position
+[AudioEngine] loadLayers -> drone=drone.wav pad=silence.wav texture=silence.wav pulse=silence.wav
+[AudioEngine] stop
+00:00 +20: /private/tmp/mindflow-practice-test-work/app/test/audio_engine_test.dart: pause and resume are forwarded to native transport
+[AudioEngine] start
+[AudioEngine] pause
+[AudioEngine] start
+[AudioEngine] stop
+00:00 +21: /private/tmp/mindflow-practice-test-work/app/test/audio_engine_test.dart: rejected or malformed pause ACK never marks transport paused
+[AudioEngine] start
+[AudioEngine] pause
+[AudioEngine] pause rejected: false
+[AudioEngine] pause
+[AudioEngine] pause rejected: pause_failed
+[AudioEngine] pause
+[AudioEngine] pause rejected: missing_pause_state
+[AudioEngine] pause
+[AudioEngine] pause rejected: unexpected
+[AudioEngine] pause
+[AudioEngine] stop
+00:00 +22: /private/tmp/mindflow-practice-test-work/app/test/audio_engine_test.dart: late pause acknowledgement cannot overwrite a completed stop
+[AudioEngine] start
+[AudioEngine] pause
+[AudioEngine] stop
+00:00 +23: /private/tmp/mindflow-practice-test-work/app/test/audio_engine_test.dart: native health failure invalidates playback and preserves close duty
+[AudioEngine] start
+[AudioEngine] stop
+00:00 +24: /private/tmp/mindflow-practice-test-work/app/test/audio_engine_test.dart: concurrent stop callers share one native close Future
+[AudioEngine] start
+[AudioEngine] stop
+00:00 +25: /private/tmp/mindflow-practice-test-work/app/test/audio_engine_test.dart: replacement load waits for the active native stop ACK
+[AudioEngine] start
+[AudioEngine] stop
+[AudioEngine] loadLayers -> drone=silence.wav pad=silence.wav texture=ambient/rain.wav pulse=silence.wav
+[AudioEngine] stop
+00:00 +26: /private/tmp/mindflow-practice-test-work/app/test/audio_engine_test.dart: master fade sends its exact native duration
+00:00 +27: /private/tmp/mindflow-practice-test-work/app/test/audio_engine_test.dart: pre-load muted target accepts a pending native acknowledgement
+00:00 +28: /private/tmp/mindflow-practice-test-work/app/test/audio_engine_test.dart: master fade rejects false and malformed native acknowledgements
+[AudioEngine] setVolume rejected: false
+[AudioEngine] setVolume rejected: gain_queue_rejected
+[AudioEngine] setVolume rejected: missing_accepted
+[AudioEngine] setVolume rejected: unexpected
+00:00 +29: /private/tmp/mindflow-practice-test-work/app/test/audio_engine_test.dart: failed native stop remains retryable until one close succeeds
+[AudioEngine] start
+[AudioEngine] stop
+[AudioEngine] stop
+00:00 +30: /private/tmp/mindflow-practice-test-work/app/test/audio_engine_test.dart: rejected native stop acknowledgement remains retryable
+[AudioEngine] start
+[AudioEngine] stop
+[AudioEngine] stop
+00:00 +31: /private/tmp/mindflow-practice-test-work/app/test/audio_engine_test.dart: stop invalidates a strict load that is still in flight
+[AudioEngine] loadLayers -> drone=drone.flac pad=silence.wav texture=silence.wav pulse=silence.wav
+[AudioEngine] stop
+[AudioEngine] stop
+00:00 +32: /private/tmp/mindflow-practice-test-work/app/test/audio_engine_test.dart: stop invalidates a non-strict load that is still in flight
+[AudioEngine] loadLayers -> drone=silence.wav pad=silence.wav texture=ambient/rain.wav pulse=silence.wav
+[AudioEngine] stop
+[AudioEngine] stop
+00:00 +33: /private/tmp/mindflow-practice-test-work/app/test/audio_engine_test.dart: start waits for a newer load that supersedes its first wait
+[AudioEngine] loadLayers -> drone=silence.wav pad=silence.wav texture=ambient/rain.wav pulse=silence.wav
+[AudioEngine] loadLayers -> drone=silence.wav pad=silence.wav texture=ambient/ocean.wav pulse=silence.wav
+[AudioEngine] start
+[AudioEngine] stop
+00:00 +34: /private/tmp/mindflow-practice-test-work/app/test/audio_engine_test.dart: a load during native start invalidates it and one queued start wins
+[AudioEngine] start
+[AudioEngine] loadLayers -> drone=silence.wav pad=silence.wav texture=ambient/rain.wav pulse=silence.wav
+[AudioEngine] start
+[AudioEngine] stop
+00:00 +35: /private/tmp/mindflow-practice-test-work/app/test/audio_engine_test.dart: stop wins over a pending non-strict start and a later start works
+[AudioEngine] start
+[AudioEngine] stop
+[AudioEngine] start
+[AudioEngine] stop
+00:00 +36: /private/tmp/mindflow-practice-test-work/app/test/audio_engine_test.dart: stop wins over a pending strict start and strict restart works
+[AudioEngine] loadLayers -> drone=drone.flac pad=silence.wav texture=silence.wav pulse=silence.wav
+[AudioEngine] start
+[AudioEngine] stop
+[AudioEngine] loadLayers -> drone=drone.flac pad=silence.wav texture=silence.wav pulse=silence.wav
+[AudioEngine] start
+[AudioEngine] stop
+00:00 +37: /private/tmp/mindflow-practice-test-work/app/test/audio_engine_test.dart: zero cancelled native transitions is a cancellation failure
+[AudioEngine] start
+[AudioEngine] stop
+00:00 +38: /private/tmp/mindflow-practice-test-work/app/test/audio_engine_test.dart: legacy cancellation bool cannot prove a multi-command cancel
+[AudioEngine] start
+[AudioEngine] stop
+00:00 +39: /private/tmp/mindflow-practice-test-work/app/test/audio_engine_test.dart: strict load arms its canonical hard end frame
+[AudioEngine] loadLayers -> drone=drone.wav pad=silence.wav texture=silence.wav pulse=silence.wav
+[AudioEngine] stop
+00:00 +40: /private/tmp/mindflow-practice-test-work/app/test/audio_engine_test.dart: non-strict native start rejection fails closed
+[AudioEngine] loadLayers -> drone=drone.wav pad=silence.wav texture=silence.wav pulse=silence.wav
+[AudioEngine] start
+[AudioEngine] stop
+00:00 +41: /private/tmp/mindflow-practice-test-work/app/test/audio_engine_test.dart: transport end update uses the canonical frame contract
+[AudioEngine] loadLayers -> drone=drone.wav pad=silence.wav texture=silence.wav pulse=silence.wav
+[AudioEngine] start
+[AudioEngine] stop
+00:00 +42: /private/tmp/mindflow-practice-test-work/app/test/audio_engine_test.dart: strict load fails closed on a native error
+[AudioEngine] loadLayers -> drone=broken.flac pad=silence.wav texture=silence.wav pulse=silence.wav
+🚨 AUDIO ENGINE ERROR: Failed to load layers: PlatformException(STRICT_LOAD_DECODE_FAILED, null, null, null)
+[AudioEngine] stop
+00:00 +43: /private/tmp/mindflow-practice-test-work/app/test/audio_engine_test.dart: strict load rejects a malformed acknowledgement
+[AudioEngine] loadLayers -> drone=drone.flac pad=silence.wav texture=silence.wav pulse=silence.wav
+🚨 AUDIO ENGINE ERROR: Native rejected strict layer load
+[AudioEngine] stop
+00:00 +44: /private/tmp/mindflow-practice-test-work/app/test/audio_engine_test.dart: strict load rejects a mismatched transport echo
+[AudioEngine] loadLayers -> drone=drone.flac pad=silence.wav texture=silence.wav pulse=silence.wav
+🚨 AUDIO ENGINE ERROR: Native rejected strict layer load
+[AudioEngine] stop
+00:00 +45: /private/tmp/mindflow-practice-test-work/app/test/audio_engine_test.dart: strict load requires an armed hard end
+🚨 AUDIO ENGINE ERROR: Strict layer load requires transportEnd
+00:00 +46: /private/tmp/mindflow-practice-test-work/app/test/audio_engine_test.dart: strict start rejects a failed or wrong-rate onset ack
+[AudioEngine] loadLayers -> drone=drone.flac pad=silence.wav texture=silence.wav pulse=silence.wav
+[AudioEngine] start
+[AudioEngine] stop
+[AudioEngine] loadLayers -> drone=drone.flac pad=silence.wav texture=silence.wav pulse=silence.wav
+[AudioEngine] start
+[AudioEngine] stop
+00:00 +47: /private/tmp/mindflow-practice-test-work/app/test/audio_engine_test.dart: a pre-start end update waits for strict load and reaches native
+[AudioEngine] loadLayers -> drone=drone.flac pad=silence.wav texture=silence.wav pulse=silence.wav
+[AudioEngine] stop
+00:00 +48: /private/tmp/mindflow-practice-test-work/app/test/audio_engine_test.dart: exact stop requires the requested hard-end frame acknowledgement
+[AudioEngine] start
+00:00 +49: /private/tmp/mindflow-practice-test-work/app/test/audio_engine_test.dart: playOneShot sends volume without changing permanent roles
+[AudioEngine] start
+[AudioEngine] playOneShot file=oneshots/bowl_2.wav pitch=1.00 reverb=0.00
+[AudioEngine] stop
+00:00 +50: /private/tmp/mindflow-practice-test-work/app/test/audio_engine_test.dart: playOneShot exposes native rejection and accepts truthful map ACK
+[AudioEngine] start
+[AudioEngine] playOneShot file=missing.wav pitch=1.00 reverb=0.00
+[AudioEngine] playOneShot rejected: asset_not_found
+[AudioEngine] playOneShot file=oneshots/bowl_2.wav pitch=1.00 reverb=0.00
+[AudioEngine] stop
+00:00 +51: /private/tmp/mindflow-practice-test-work/app/test/audio_engine_test.dart: completion sparkle may play after the strict transport stops
+[AudioEngine] playOneShot file=bowl_3.wav pitch=1.00 reverb=0.00
+[AudioEngine] stop
+00:00 +52: loading /private/tmp/mindflow-practice-test-work/app/test/soundscape_engine_test.dart
+00:00 +52: /private/tmp/mindflow-practice-test-work/app/test/soundscape_engine_test.dart: sleep mix stays quiet and non-pulsing with neutral AI params
+00:00 +53: /private/tmp/mindflow-practice-test-work/app/test/soundscape_engine_test.dart: focus mix can still use pulse movement
+00:00 +54: /private/tmp/mindflow-practice-test-work/app/test/soundscape_engine_test.dart: mood mix keeps texture and pulse audible with quiet AI output
+00:00 +55: /private/tmp/mindflow-practice-test-work/app/test/soundscape_engine_test.dart: SceneIntent clamps invalid and out-of-range values
+00:00 +56: /private/tmp/mindflow-practice-test-work/app/test/soundscape_engine_test.dart: AI adapter produces normalized semantic intent
+00:00 +57: /private/tmp/mindflow-practice-test-work/app/test/soundscape_engine_test.dart: seeded target-point modulation is reproducible
+00:00 +58: loading /private/tmp/mindflow-practice-test-work/app/test/soundscape_config_test.dart
+00:01 +58: /private/tmp/mindflow-practice-test-work/app/test/soundscape_config_test.dart: all configured soundscape assets exist and are tracked
+00:04 +59: /private/tmp/mindflow-practice-test-work/app/test/soundscape_config_test.dart: UI scenario ids have explicit soundscape configs
+00:04 +60: /private/tmp/mindflow-practice-test-work/app/test/soundscape_config_test.dart: energy exposes all production sets
+00:04 +61: /private/tmp/mindflow-practice-test-work/app/test/soundscape_config_test.dart: calm lengthens crossfades without increasing structural cadence
+00:04 +62: /private/tmp/mindflow-practice-test-work/app/test/soundscape_config_test.dart: every populated core set_03 is registered as a variation
+00:04 +63: /private/tmp/mindflow-practice-test-work/app/test/soundscape_config_test.dart: every populated core set_02 is registered as a variation
+00:04 +64: /private/tmp/mindflow-practice-test-work/app/test/soundscape_config_test.dart: sleep registers three sets with an explicit pulse-removal bridge
+00:04 +65: /private/tmp/mindflow-practice-test-work/app/test/soundscape_config_test.dart: every core variation exposes one exact 48 kHz transport grid
+00:04 +66: /private/tmp/mindflow-practice-test-work/app/test/soundscape_config_test.dart: production Dart uses loadLayers for native audio loading
+00:04 +67: /private/tmp/mindflow-practice-test-work/app/test/soundscape_config_test.dart: definition adapter preserves every existing variation
+00:04 +68: /private/tmp/mindflow-practice-test-work/app/test/soundscape_config_test.dart: legacy aliases and unknown ids degrade safely
+00:04 +69: /private/tmp/mindflow-practice-test-work/app/test/soundscape_config_test.dart: an empty configured scene safely falls back to calm
+[SoundscapeConfig] scene=empty_test_scene has no variants; falling back to calm
+00:04 +70: /private/tmp/mindflow-practice-test-work/app/test/soundscape_config_test.dart: catalog diagnostics describe incomplete production content
+00:04 +71: loading /private/tmp/mindflow-practice-test-work/app/test/runtime_soundscape_arranger_test.dart
+00:05 +71: /private/tmp/mindflow-practice-test-work/app/test/runtime_soundscape_arranger_test.dart: role pools and deterministic start same seed selects the same starting variant
+00:05 +72: /private/tmp/mindflow-practice-test-work/app/test/runtime_soundscape_arranger_test.dart: role pools and deterministic start different seeds select different starts when variants exist
+00:05 +73: /private/tmp/mindflow-practice-test-work/app/test/runtime_soundscape_arranger_test.dart: role pools and deterministic start duplicate assets are deduplicated per role
+00:05 +74: /private/tmp/mindflow-practice-test-work/app/test/runtime_soundscape_arranger_test.dart: role pools and deterministic start silence and empty paths are excluded from regular pools
+00:05 +75: /private/tmp/mindflow-practice-test-work/app/test/runtime_soundscape_arranger_test.dart: role pools and deterministic start an incomplete scene still starts with a real audible role
+00:05 +76: /private/tmp/mindflow-practice-test-work/app/test/runtime_soundscape_arranger_test.dart: role pools and deterministic start unknown scene definition uses the calm fallback
+00:05 +77: /private/tmp/mindflow-practice-test-work/app/test/runtime_soundscape_arranger_test.dart: loop-aligned core timing automatic core sessions always start from set_01
+00:05 +78: /private/tmp/mindflow-practice-test-work/app/test/runtime_soundscape_arranger_test.dart: loop-aligned core timing manual variation remains an explicit startup override
+00:05 +79: /private/tmp/mindflow-practice-test-work/app/test/runtime_soundscape_arranger_test.dart: loop-aligned core timing an absent role in a selected set stays absent
+00:05 +80: /private/tmp/mindflow-practice-test-work/app/test/runtime_soundscape_arranger_test.dart: loop-aligned core timing strict role removal fails closed without a loop-aligned bridge
+00:05 +81: /private/tmp/mindflow-practice-test-work/app/test/runtime_soundscape_arranger_test.dart: loop-aligned core timing strict prequeue fades a role out and back in without leaking transport silence
+00:05 +82: /private/tmp/mindflow-practice-test-work/app/test/runtime_soundscape_arranger_test.dart: loop-aligned core timing cancelling a prepared role removal preserves logical presence
+00:05 +83: /private/tmp/mindflow-practice-test-work/app/test/runtime_soundscape_arranger_test.dart: loop-aligned core timing long sleep rotations never stall on a phase-disabled absent pulse
+00:05 +84: /private/tmp/mindflow-practice-test-work/app/test/runtime_soundscape_arranger_test.dart: loop-aligned core timing calm uses one real loop boundary per five-minute block
+00:06 +85: /private/tmp/mindflow-practice-test-work/app/test/runtime_soundscape_arranger_test.dart: loop-aligned core timing a 15-minute strict plan reserves both changes before playback
+00:06 +86: /private/tmp/mindflow-practice-test-work/app/test/runtime_soundscape_arranger_test.dart: loop-aligned core timing three-set core scenes distribute sessions across alternatives
+00:06 +87: /private/tmp/mindflow-practice-test-work/app/test/runtime_soundscape_arranger_test.dart: loop-aligned core timing every non-sleep core scene follows its declared loop grid
+00:06 +88: /private/tmp/mindflow-practice-test-work/app/test/runtime_soundscape_arranger_test.dart: loop-aligned core timing long core sessions prequeue continuous bounded set cycles
+00:06 +89: /private/tmp/mindflow-practice-test-work/app/test/runtime_soundscape_arranger_test.dart: loop-aligned core timing three-set core scenes cycle all sets in both seeded directions
+00:06 +90: /private/tmp/mindflow-practice-test-work/app/test/runtime_soundscape_arranger_test.dart: loop-aligned core timing long strict tail can shrink and extend transactionally
+00:06 +91: /private/tmp/mindflow-practice-test-work/app/test/runtime_soundscape_arranger_test.dart: loop-aligned core timing inconsistent role loop metadata cannot enter strict transport
+00:06 +92: /private/tmp/mindflow-practice-test-work/app/test/runtime_soundscape_arranger_test.dart: loop-aligned core timing failed replacement waits for the next complete source cycle
+00:06 +93: /private/tmp/mindflow-practice-test-work/app/test/runtime_soundscape_arranger_test.dart: loop-aligned core timing strict native acknowledgement must preserve the exact frame
+00:06 +94: /private/tmp/mindflow-practice-test-work/app/test/runtime_soundscape_arranger_test.dart: loop-aligned core timing a failed first sadness transition retries on the source grid
+00:06 +95: /private/tmp/mindflow-practice-test-work/app/test/runtime_soundscape_arranger_test.dart: loop-aligned core timing failed replacement retries on the source origin grid
+00:06 +96: /private/tmp/mindflow-practice-test-work/app/test/runtime_soundscape_arranger_test.dart: loop-aligned core timing a pause keeps the next replacement on the audible loop grid
+00:06 +97: /private/tmp/mindflow-practice-test-work/app/test/runtime_soundscape_arranger_test.dart: loop-aligned core timing pause freezes a strict crossfade on the audible transport grid
+00:06 +98: /private/tmp/mindflow-practice-test-work/app/test/runtime_soundscape_arranger_test.dart: loop-aligned core timing changing session duration preserves active and pending layers
+00:06 +99: /private/tmp/mindflow-practice-test-work/app/test/runtime_soundscape_arranger_test.dart: loop-aligned core timing extending a five-minute session restores its missing loop schedule
+00:06 +100: /private/tmp/mindflow-practice-test-work/app/test/runtime_soundscape_arranger_test.dart: loop-aligned core timing a late timer extension waits for the next complete loop
+00:06 +101: /private/tmp/mindflow-practice-test-work/app/test/runtime_soundscape_arranger_test.dart: loop-aligned core timing successful shortening cancels a prepared future transition
+00:06 +102: /private/tmp/mindflow-practice-test-work/app/test/runtime_soundscape_arranger_test.dart: loop-aligned core timing failed cancellation protects the complete incoming loop
+00:06 +103: /private/tmp/mindflow-practice-test-work/app/test/runtime_soundscape_arranger_test.dart: loop-aligned core timing shortening after the boundary protects the complete target loop
+00:06 +104: /private/tmp/mindflow-practice-test-work/app/test/runtime_soundscape_arranger_test.dart: loop-aligned core timing extension restores a schedule after a long paused outro
+00:06 +105: /private/tmp/mindflow-practice-test-work/app/test/runtime_soundscape_arranger_test.dart: loop-aligned core timing sleep starts its first replacement on the five-minute boundary
+00:06 +106: /private/tmp/mindflow-practice-test-work/app/test/runtime_soundscape_arranger_test.dart: loop-aligned core timing strict fade never outlives the incoming target loop
+00:06 +107: /private/tmp/mindflow-practice-test-work/app/test/runtime_soundscape_arranger_test.dart: runtime structural decisions same seed and intent sequence produce identical commands
+00:06 +108: /private/tmp/mindflow-practice-test-work/app/test/runtime_soundscape_arranger_test.dart: runtime structural decisions different seeds produce different long trajectories
+00:06 +109: /private/tmp/mindflow-practice-test-work/app/test/runtime_soundscape_arranger_test.dart: runtime structural decisions one unique WAV never creates a crossfade
+00:06 +110: /private/tmp/mindflow-practice-test-work/app/test/runtime_soundscape_arranger_test.dart: runtime structural decisions two or more WAV allow role replacement
+00:06 +111: /private/tmp/mindflow-practice-test-work/app/test/runtime_soundscape_arranger_test.dart: runtime structural decisions active asset is never selected as the replacement
+00:06 +112: /private/tmp/mindflow-practice-test-work/app/test/runtime_soundscape_arranger_test.dart: runtime structural decisions recently used asset does not return on the next replacement
+00:06 +113: /private/tmp/mindflow-practice-test-work/app/test/runtime_soundscape_arranger_test.dart: runtime structural decisions each advance emits at most one permanent-role change
+00:06 +114: /private/tmp/mindflow-practice-test-work/app/test/runtime_soundscape_arranger_test.dart: runtime structural decisions a role cannot start a parallel crossfade
+00:06 +115: /private/tmp/mindflow-practice-test-work/app/test/runtime_soundscape_arranger_test.dart: runtime structural decisions no planned replacement is emitted before five minutes
+00:06 +116: /private/tmp/mindflow-practice-test-work/app/test/runtime_soundscape_arranger_test.dart: runtime structural decisions replacements become available after five minutes
+00:06 +117: /private/tmp/mindflow-practice-test-work/app/test/runtime_soundscape_arranger_test.dart: runtime structural decisions a five minute session can finish without a replacement
+00:06 +118: /private/tmp/mindflow-practice-test-work/app/test/runtime_soundscape_arranger_test.dart: runtime structural decisions a long scene receives multiple gradual changes
+00:06 +119: /private/tmp/mindflow-practice-test-work/app/test/runtime_soundscape_arranger_test.dart: runtime structural decisions production calm uses multi-minute crossfades before outro
+00:08 +120: /private/tmp/mindflow-practice-test-work/app/test/runtime_soundscape_arranger_test.dart: runtime structural decisions high stability reduces structural activity
+00:08 +121: /private/tmp/mindflow-practice-test-work/app/test/runtime_soundscape_arranger_test.dart: runtime structural decisions high stability extends newly selected layer lifetime
+00:08 +122: /private/tmp/mindflow-practice-test-work/app/test/runtime_soundscape_arranger_test.dart: runtime structural decisions low pulse presence limits pulse replacements
+00:08 +123: /private/tmp/mindflow-practice-test-work/app/test/runtime_soundscape_arranger_test.dart: runtime structural decisions intent changes probabilities but never names an asset
+00:08 +124: /private/tmp/mindflow-practice-test-work/app/test/runtime_soundscape_arranger_test.dart: runtime structural decisions failed crossfade retains the previous active path
+00:08 +125: /private/tmp/mindflow-practice-test-work/app/test/runtime_soundscape_arranger_test.dart: runtime structural decisions stop and dispose prevent future commands
+00:08 +126: /private/tmp/mindflow-practice-test-work/app/test/runtime_soundscape_arranger_test.dart: Custom Mix runtime pinning pinned role only uses variants from the selected environment
+00:08 +127: /private/tmp/mindflow-practice-test-work/app/test/runtime_soundscape_arranger_test.dart: Custom Mix runtime pinning unpinned base roles continue to evolve
+00:08 +128: /private/tmp/mindflow-practice-test-work/app/test/runtime_soundscape_arranger_test.dart: Custom Mix runtime pinning preview never starts runtime arrangement
+00:08 +129: /private/tmp/mindflow-practice-test-work/app/test/runtime_soundscape_arranger_test.dart: generative one-shots earliest time is respected
+00:08 +130: /private/tmp/mindflow-practice-test-work/app/test/runtime_soundscape_arranger_test.dart: generative one-shots cooldown and max-per-session are respected
+00:08 +131: /private/tmp/mindflow-practice-test-work/app/test/runtime_soundscape_arranger_test.dart: generative one-shots an event can be skipped by probability
+00:08 +132: /private/tmp/mindflow-practice-test-work/app/test/runtime_soundscape_arranger_test.dart: generative one-shots one event file cannot immediately repeat
+00:08 +133: /private/tmp/mindflow-practice-test-work/app/test/runtime_soundscape_arranger_test.dart: generative one-shots an event forbidden in the current phases is not emitted
+00:08 +134: /private/tmp/mindflow-practice-test-work/app/test/runtime_soundscape_arranger_test.dart: generative one-shots stop cancels future events and completion gong is separate
+00:08 +135: loading /private/tmp/mindflow-practice-test-work/app/test/session_mix_config_test.dart
+00:09 +135: /private/tmp/mindflow-practice-test-work/app/test/session_mix_config_test.dart: rain replaces texture and keeps the remaining calm layers
+00:09 +136: /private/tmp/mindflow-practice-test-work/app/test/session_mix_config_test.dart: space replaces drone rather than stacking a fifth layer
+00:09 +137: /private/tmp/mindflow-practice-test-work/app/test/session_mix_config_test.dart: balance scales base roles and the replaced role independently
+00:09 +138: /private/tmp/mindflow-practice-test-work/app/test/session_mix_config_test.dart: ambient replacement suppresses future changes to that role
+00:09 +139: loading /private/tmp/mindflow-practice-test-work/app/test/ambient_mix_profile_test.dart
+00:09 +139: /private/tmp/mindflow-practice-test-work/app/test/ambient_mix_profile_test.dart: production Custom Mix catalog excludes placeholder backgrounds
+00:09 +140: /private/tmp/mindflow-practice-test-work/app/test/ambient_mix_profile_test.dart: profiles define the functional layer slot and safe level cap
+00:09 +141: /private/tmp/mindflow-practice-test-work/app/test/ambient_mix_profile_test.dart: scene compatibility removes known dense combinations
+00:09 +142: loading /private/tmp/mindflow-practice-test-work/app/test/favorite_mix_preset_test.dart
+00:14 +142: /private/tmp/mindflow-practice-test-work/app/test/favorite_mix_preset_test.dart: mix balance survives favorite JSON persistence
+00:14 +143: /private/tmp/mindflow-practice-test-work/app/test/favorite_mix_preset_test.dart: legacy favorites remain readable without mix fields
+00:14 +144: /private/tmp/mindflow-practice-test-work/app/test/favorite_mix_preset_test.dart: saved duration is part of the reusable session identity
+00:14 +145: loading /private/tmp/mindflow-practice-test-work/app/test/scenario_runtime_controller_test.dart
+00:14 +145: /private/tmp/mindflow-practice-test-work/app/test/scenario_runtime_controller_test.dart: ScenarioRuntimeController starts the first stage with its catalog duration
+00:14 +146: /private/tmp/mindflow-practice-test-work/app/test/scenario_runtime_controller_test.dart: ScenarioRuntimeController advances automatically to the second stage boundary
+00:14 +147: /private/tmp/mindflow-practice-test-work/app/test/scenario_runtime_controller_test.dart: ScenarioRuntimeController executes every stage in catalog order
+00:14 +148: /private/tmp/mindflow-practice-test-work/app/test/scenario_runtime_controller_test.dart: ScenarioRuntimeController repeated scene ids are not skipped
+00:14 +149: /private/tmp/mindflow-practice-test-work/app/test/scenario_runtime_controller_test.dart: ScenarioRuntimeController four focus and calm cycles execute completely
+00:14 +150: /private/tmp/mindflow-practice-test-work/app/test/scenario_runtime_controller_test.dart: ScenarioRuntimeController scene id and environment change with the stage
+00:14 +151: /private/tmp/mindflow-practice-test-work/app/test/scenario_runtime_controller_test.dart: ScenarioRuntimeController overall progress does not reset between stages
+00:14 +152: /private/tmp/mindflow-practice-test-work/app/test/scenario_runtime_controller_test.dart: ScenarioRuntimeController current-stage progress resets on transition
+00:14 +153: /private/tmp/mindflow-practice-test-work/app/test/scenario_runtime_controller_test.dart: ScenarioRuntimeController pause freezes both stage and overall elapsed
+00:14 +154: /private/tmp/mindflow-practice-test-work/app/test/scenario_runtime_controller_test.dart: ScenarioRuntimeController resume continues the current stage
+00:14 +155: /private/tmp/mindflow-practice-test-work/app/test/scenario_runtime_controller_test.dart: ScenarioRuntimeController stop terminates the whole scenario
+00:14 +156: /private/tmp/mindflow-practice-test-work/app/test/scenario_runtime_controller_test.dart: ScenarioRuntimeController the last stage completes the scenario once
+00:14 +157: /private/tmp/mindflow-practice-test-work/app/test/scenario_runtime_controller_test.dart: ScenarioRuntimeController transition lock prevents two stages starting concurrently
+00:14 +158: /private/tmp/mindflow-practice-test-work/app/test/scenario_runtime_controller_test.dart: ScenarioRuntimeController each stage receives a deterministic independent seed
+00:14 +159: /private/tmp/mindflow-practice-test-work/app/test/scenario_runtime_controller_test.dart: ScenarioRuntimeController same scenario seed reproduces all stage seeds
+00:14 +160: /private/tmp/mindflow-practice-test-work/app/test/scenario_runtime_controller_test.dart: ScenarioRuntimeController different scenario seeds produce different stage seeds
+00:14 +161: /private/tmp/mindflow-practice-test-work/app/test/scenario_runtime_controller_test.dart: ScenarioRuntimeController total duration is the sum of catalog stage durations
+00:14 +162: /private/tmp/mindflow-practice-test-work/app/test/scenario_runtime_controller_test.dart: ScenarioRuntimeController elapsed is clamped to the current stage duration
+00:14 +163: /private/tmp/mindflow-practice-test-work/app/test/scenario_runtime_controller_test.dart: ScenarioRuntimeController completion produces one aggregate timeline
+00:14 +164: /private/tmp/mindflow-practice-test-work/app/test/scenario_runtime_controller_test.dart: ScenarioRuntimeController technical stages do not create any history records themselves
+00:14 +165: loading /private/tmp/mindflow-practice-test-work/app/test/mix_flow_screen_test.dart
+00:15 +165: /private/tmp/mindflow-practice-test-work/app/test/mix_flow_screen_test.dart: intro fits an iPhone 16 Pro viewport
+00:16 +166: /private/tmp/mindflow-practice-test-work/app/test/mix_flow_screen_test.dart: state selection reuses the main state cards
+00:16 +167: /private/tmp/mindflow-practice-test-work/app/test/mix_flow_screen_test.dart: add background aligns with the intro continue button
+00:16 +168: /private/tmp/mindflow-practice-test-work/app/test/mix_flow_screen_test.dart: intro photo aligns with the second-step content
+00:16 +169: /private/tmp/mindflow-practice-test-work/app/test/mix_flow_screen_test.dart: ambient balance keeps start action visible
+00:16 +170: /private/tmp/mindflow-practice-test-work/app/test/mix_flow_screen_test.dart: ambient selection summary aligns with state step
+00:17 +171: /private/tmp/mindflow-practice-test-work/app/test/mix_flow_screen_test.dart: close button exits the flow from a later step
+00:17 +172: /private/tmp/mindflow-practice-test-work/app/test/mix_flow_screen_test.dart: back returns to the previous step
+00:17 +173: /private/tmp/mindflow-practice-test-work/app/test/mix_flow_screen_test.dart: preview becomes active only after audible mix ACK
+[AudioEngine] loadLayers -> drone=core_states/calmness/set_01/core_calm_drone.flac pad=core_states/calmness/set_01/core_calm_pad.flac texture=ambient/rain/set_01/core_rain_texture.wav pulse=core_states/calmness/set_01/core_calm_pulse.flac
+[AudioEngine] start
+[AudioEngine] updateMix sent scene=calm drone=0.364 pad=0.364 texture=0.119 pulse=0.196 cutoff=0.680 width=0.820 reverb=0.380 delay=0.000
+[AudioEngine] stop
+00:17 +174: /private/tmp/mindflow-practice-test-work/app/test/mix_flow_screen_test.dart: rejected preview load stays stopped and closes ownership
+[AudioEngine] loadLayers -> drone=core_states/calmness/set_01/core_calm_drone.flac pad=core_states/calmness/set_01/core_calm_pad.flac texture=ambient/rain/set_01/core_rain_texture.wav pulse=core_states/calmness/set_01/core_calm_pulse.flac
+🚨 AUDIO ENGINE ERROR: Native rejected layer load
+[CustomMixPreview] start failed: Bad state: Preview layer load was rejected.
+#0      _MixFlowScreenState._startPreviewInternal (package:mindflow/features/session_formats/mix/mix_flow_screen.dart:213:20)
+<asynchronous suspension>
+#1      _MixFlowScreenState._setPreviewRequested.<anonymous closure> (package:mindflow/features/session_formats/mix/mix_flow_screen.dart:166:11)
+<asynchronous suspension>
+#2      _MixFlowScreenState._togglePreview (package:mindflow/features/session_formats/mix/mix_flow_screen.dart:151:5)
+<asynchronous suspension>
+
+[AudioEngine] stop
+00:17 +175: loading /private/tmp/mindflow-practice-test-work/app/test/scenarios_flow_screen_test.dart
+00:18 +175: /private/tmp/mindflow-practice-test-work/app/test/scenarios_flow_screen_test.dart: intro follows the approved mix screen system
+00:19 +176: /private/tmp/mindflow-practice-test-work/app/test/scenarios_flow_screen_test.dart: catalog contains 12 scenarios and working filters
+00:19 +177: /private/tmp/mindflow-practice-test-work/app/test/scenarios_flow_screen_test.dart: scenario card opens a detail plan without service indicators
+00:19 +178: /private/tmp/mindflow-practice-test-work/app/test/scenarios_flow_screen_test.dart: back from detail returns to the catalog
+00:19 +179: All tests passed!
